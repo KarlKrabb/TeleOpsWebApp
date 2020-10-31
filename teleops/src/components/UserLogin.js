@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import {UserAuth} from "../endpoints"
 import {Link} from "react-router-dom"
 
@@ -6,7 +6,7 @@ const UserLogin = (props) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [loginError, setLoginError] = useState("")    
+    const [loginError, setLoginError] = useState("") 
 
     const handleSubmit = () => {
         console.log("Submitted")
@@ -54,7 +54,7 @@ const UserLogin = (props) => {
                         Login
                     </div>
                 </form>
-                {(loginError != "") && <p style={errorStyle}>{loginError}</p>}
+                {(loginError !== "") && <p style={errorStyle}>{loginError}</p>}
                 <Link style={linkStyle} to="/register" >Register</Link>
             </div>
         </div>
@@ -108,5 +108,7 @@ const errorStyle = {
 
 const linkStyle = {
     color: "#5d5d5d",
-    fontSize: "0.8em"
+    fontSize: "0.8em",
+    marginTop: "10px",
+    display: "block"
 }

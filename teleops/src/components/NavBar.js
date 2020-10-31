@@ -1,12 +1,31 @@
 import React from "react"
+import {NavLink} from "react-router-dom"
 
 const NavBar = () => {
     return(
         <nav style={navStyles}>
-            <h3>Logo</h3>
+            <h3>Tele-Operative</h3>
             <ul style={ulStyles}>
-                <li>Login</li>
-                <li>Register</li>
+                <li>
+                    <NavLink 
+                        to="/"
+                        style={linkStyle}
+                        activeStyle={activeLinkStyle}
+                        exact
+                    >
+                        Login
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink 
+                        to="/register"
+                        style={linkStyle}
+                        activeStyle={activeLinkStyle}
+                        exact         
+                    >
+                        Register
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
@@ -29,6 +48,15 @@ const ulStyles = {
     listStyle: "none"
 }
 
-const liStyles = {
+const linkStyle = {
+    color: "white",
+    // fontWeight: "bold",
+    textDecoration: "none",
+    cursor: "pointer"
+}
 
+const activeLinkStyle = {
+    fontWeight: "bold",
+    paddingBottom: "5px",
+    borderBottom: "1px solid #37a2ff"
 }
