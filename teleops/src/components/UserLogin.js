@@ -1,29 +1,37 @@
 import React, { useState } from "react"
 import {UserAuth} from "../endpoints"
 import {Link} from "react-router-dom"
+import Username from "./inputs/Username"
+import Password from "./inputs/Password"
 
 const UserLogin = (props) => {
 
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState({value:"",isValid:false})
+    const [password, setPassword] = useState({value:"",isValid:false})
     const [loginError, setLoginError] = useState("") 
 
     const handleSubmit = () => {
-        console.log("Submitted")
         console.log(username)
         console.log(password)
-        UserAuth(username,password)
-        .then((response) => {
-            console.log(response)
-            if (response.data.valid) {
-                const { UserID, ConfigID } = response.data
-                sessionStorage.setItem("UserID", UserID)
-                sessionStorage.setItem("ConfigID", ConfigID)
-                props.history.push("/timeline");
-            }else{
-                setLoginError("Username or password is incorrect")
-            }
-        })
+        if(username.isValid && password.isValid){
+            console.log(username.value)
+            console.log(password.value)
+            UserAuth(username.value,password.value)
+            .then((response) => {
+                console.log("Submitted")
+                console.log(response)
+                if (response.data.valid) {
+                    const { UserID, ConfigID } = response.data
+                    sessionStorage.setItem("UserID", UserID)
+                    sessionStorage.setItem("ConfigID", ConfigID)
+                    props.history.push("/timeline");
+                }else{
+                    setLoginError("Username or password is incorrect")
+                }
+            })
+        }else{
+            setLoginError("Pleases enter a valid username and password")
+        }
     }
 
     return(
@@ -31,22 +39,15 @@ const UserLogin = (props) => {
             <div style={loginFormContainer}>
                 <h2>User Login</h2>                        
                 <form style={formStyles}>
-                    <input 
-                        style={inputStyles} 
-                        type="text" 
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e)=>{setUsername(e.target.value)}}
-                        autoComplete="email"
-                    />
-                    <input 
-                        style={inputStyles} 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password}
-                        onChange={(e)=>{setPassword(e.target.value)}}
-                        autoComplete="current-password"
-                    />
+                    <Username 
+                        parentObj={username}
+                        updateParentObj={setUsername}
+                    />                    
+                    <Password 
+                        parentObj={password}
+                        updateParentObj={setPassword}
+                        placeholder={"Password"}
+                    />                    
                     <div 
                         onClick={() => {handleSubmit()}}
                         style={submitBtnStyle}
@@ -87,7 +88,8 @@ const inputStyles = {
     padding: "10px",
     fontSize: "1em",
     borderRadius: "10px",
-    border: "1px solid grey"
+    border: "1px solid grey",
+    width: "-webkit-fill-available"
 }
 
 const submitBtnStyle = {
