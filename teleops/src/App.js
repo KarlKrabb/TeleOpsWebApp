@@ -1,14 +1,14 @@
 import React from "react"
 import './styles/App.css'
 import NavBar from './components/NavBar'
-import NoMatch from "./components/NoMatch"
+import NoMatch from "./components/externalpages/NoMatch"
 import { Switch, Route } from 'react-router-dom'
 import routes from "./routes"
 
 const App = () => {
   return (
     <React.Fragment>
-      <NavBar />
+      <NavBar  />
       <Switch>
         {routes.map(({ path, exact, component: C, ...rest }) => (
           <Route

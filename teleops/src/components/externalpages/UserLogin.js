@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {UserAuth} from "../endpoints"
+import {UserAuth} from "../../endpoints"
 import {Link} from "react-router-dom"
 import Username from "./inputs/Username"
 import Password from "./inputs/Password"
@@ -24,6 +24,7 @@ const UserLogin = (props) => {
                     const { UserID, ConfigID } = response.data
                     sessionStorage.setItem("UserID", UserID)
                     sessionStorage.setItem("ConfigID", ConfigID)
+                    sessionStorage.setItem("UserStatus", "Existing")
                     props.history.push("/timeline");
                 }else{
                     setLoginError("Username or password is incorrect")
@@ -36,17 +37,19 @@ const UserLogin = (props) => {
 
     return(
         <div style={loginPageStyle}>
-            <div style={loginFormContainer}>
+            <div style={loginFormContainer}>                
                 <h2>User Login</h2>                        
-                <form style={formStyles}>
+                <form style={formStyles}>                    
                     <Username 
                         parentObj={username}
                         updateParentObj={setUsername}
-                    />                    
+                    />
                     <Password 
                         parentObj={password}
+                        name={"password"}
                         updateParentObj={setPassword}
                         placeholder={"Password"}
+                        id={"passwordInput"}
                     />                    
                     <div 
                         onClick={() => {handleSubmit()}}
@@ -72,24 +75,17 @@ const loginPageStyle = {
 
 const loginFormContainer = {
     textAlign: "center",
-    marginTop: "20vh",
-    width: "200px",
+    marginTop: "2%",
+    marginLeft: "2%",
+    marginRight: "2%",
+    maxWidth: "300px",
     border: "1px solid lightgrey",
     padding: "20px",
     borderRadius: "10px"
 }
 
 const formStyles = {
-    display: "block"
-}
-
-const inputStyles = {
-    marginTop: "10px",
-    padding: "10px",
-    fontSize: "1em",
-    borderRadius: "10px",
-    border: "1px solid grey",
-    width: "-webkit-fill-available"
+    // display: "block"
 }
 
 const submitBtnStyle = {
@@ -113,4 +109,9 @@ const linkStyle = {
     fontSize: "0.8em",
     marginTop: "10px",
     display: "block"
+}
+
+const inputWrap = {
+    backgroundColor:"grey",
+    paddingRight: "20px"    
 }

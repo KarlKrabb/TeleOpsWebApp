@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {hasErrorInputStyles, hasValueInputStyles, inputLabel, inputStyles, errorTexyStyle} from "./styles"
+import {hasErrorInputStyles, hasValueInputStyles, inputLabel, inputStyles, errorTexyStyle, inputContainerStyle} from "./styles"
 
 const Name = (props) => {
 
@@ -24,16 +24,18 @@ const Name = (props) => {
     return(
         <React.Fragment>
             {(value.length > 0) && <label style={inputLabel} htmlFor="nameInput">Surname</label>}
-            <input
-                name="name"
-                id="nameInput"
-                placeholder="Name"
-                type="text"
-                value={value}
-                onChange={(e) => {handleChange(e)}}
-                autoComplete="name"
-                style={ (!value.length > 0 ) ? inputStyles : (valid) ? hasValueInputStyles : hasErrorInputStyles }
-            />
+            <div style={inputContainerStyle}>
+                <input
+                    name="name"
+                    id="nameInput"
+                    placeholder="Name"
+                    type="text"
+                    value={value}
+                    onChange={(e) => {handleChange(e)}}
+                    autoComplete="name"
+                    style={ (!value.length > 0 ) ? inputStyles : (valid) ? hasValueInputStyles : hasErrorInputStyles }
+                />
+            </div>
             {(!valid && value !== "") && <div style={errorTexyStyle}>Enter First Name</div>}
         </React.Fragment>
     )            

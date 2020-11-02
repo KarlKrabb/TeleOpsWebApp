@@ -1,5 +1,7 @@
-import Register from "./components/Register";
-import UserLogin from "./components/UserLogin";
+import Register from "./components/externalpages/Register";
+import UserLogin from "./components/externalpages/UserLogin";
+import Timeline from "./components/mainpage/Timeline";
+import WorkDayConfig from "./components/settingpages/WorkDayConfig"
 
 const routes = [
     {
@@ -10,6 +12,14 @@ const routes = [
         path: "/register",
         exact: true,
         component: Register
+    },{
+        path: "/timeline",
+        exact: true,
+        component: Timeline
+    },{
+        path: "/config",
+        exact: true,
+        component: WorkDayConfig
     }
 ]
 

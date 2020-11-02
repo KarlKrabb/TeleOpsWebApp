@@ -3,8 +3,9 @@ import Email from "./inputs/Email"
 import Name from "./inputs/Name"
 import Password from "./inputs/Password"
 import Surname from "./inputs/Surname"
+import {AddUser} from "../../endpoints"
 
-const Register = () => {
+const Register = (props) => {
 
     const [name, setName] = useState({value:"",isValid:false})
     const [surname, setSurname] = useState({value:"",isValid:false})
@@ -14,21 +15,38 @@ const Register = () => {
     const [passwordNoMatch, setPasswordNoMatch] = useState("")
 
     const handleSubmit = () => {
-
+        console.log(name, surname, email, password)
+        if(name.isValid && surname.isValid && email.isValid && password.isValid){
+            AddUser(name.value,surname.value,email.value,password.value)
+            .then((response) => {
+                console.log(response)
+                const {configID, newUserID} = response.data
+                sessionStorage.setItem("UserID", newUserID)
+                sessionStorage.setItem("ConfigID", configID)
+                sessionStorage.setItem("UserStatus", "BrandNew")
+                props.history.push("/config");
+            })
+        }        
     }
 
     useEffect(() => {
         console.log("Password: " + password.value)
-        console.log("Confirm:" + confirmPassword.value)
+        console.log("Confirm: " + confirmPassword.value)
         console.log(confirmPassword.value.length)
         if (confirmPassword.value.length > 0) {
-            if (password !== confirmPassword) {
-                setPasswordNoMatch("Passwords don't match")
-            }else{
+            if (confirmPassword.value == password.value) {
+                console.log("Match")
                 setPasswordNoMatch("")
+            }else{
+                console.log("No Match")
+                setPasswordNoMatch("Passwords don't match")
             }
         }
     }, [confirmPassword])
+
+    useEffect(() => {
+        console.log(passwordNoMatch)
+    }, [passwordNoMatch])
 
     return(        
         <div style={registerPageStyle}>
@@ -49,12 +67,14 @@ const Register = () => {
                     />
                     <Password 
                         placeholder={"New password"}
+                        name={"password"}
                         parentObj={password}
                         updateParentObj={setPassword}
                         id={"newPasswordInput"}
                     />
                     <Password 
                         placeholder={"Confirm password"}
+                        name={"password"}
                         parentObj={confirmPassword}
                         updateParentObj={setConfirmPassword}
                         id={"confirmPasswordInput"}
@@ -82,8 +102,10 @@ const registerPageStyle = {
 
 const registerFormContainer = {
     textAlign: "center",
-    marginTop: "20vh",
-    width: "200px",
+    marginTop: "2%",
+    marginLeft: "2%",
+    marginRight: "2%",
+    maxWidth: "300px",
     border: "1px solid lightgrey",
     padding: "20px",
     borderRadius: "10px"
