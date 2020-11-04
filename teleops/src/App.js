@@ -5,7 +5,8 @@ import NoMatch from "./components/externalpages/NoMatch"
 import { Switch, Route } from 'react-router-dom'
 import routes from "./routes"
 
-const App = () => {
+const App = () => {  
+
   return (
     <React.Fragment>
       <NavBar  />
