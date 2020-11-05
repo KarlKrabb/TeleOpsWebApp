@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, {useState, useEffect} from "react"
 import {GetConfig} from "../../endpoints"
-import SetupForm from "./SetupForm"
+import Timeline from "./Timeline"
 
+const MainPage = () => {
 
-const WorkDayConfig = (props) => {
-    
     const [ConfigID, setConfigID ] = useState(sessionStorage.getItem("ConfigID"))
     const [loading, setLoading] = useState(true)
     const [timeConfig, setTimeConfig] = useState()    
@@ -23,25 +22,21 @@ const WorkDayConfig = (props) => {
         }        
     }, [timeConfig])
 
-    
-
     if(loading){
         return(
             <div>
                 Loading...
             </div>
         )
-    }else{
+    } else {
         return(
-            <SetupForm 
-                timeConfig={timeConfig}
-            />        
+            <div>
+                <Timeline  
+                    timeConfig={timeConfig}
+                />
+            </div>
         )
-    }    
+    }
 }
 
-export default WorkDayConfig
-
-
-
-
+export default MainPage

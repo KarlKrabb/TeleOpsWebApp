@@ -1,15 +1,24 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import './styles/App.css'
 import NavBar from './components/NavBar'
 import NoMatch from "./components/externalpages/NoMatch"
 import { Switch, Route } from 'react-router-dom'
 import routes from "./routes"
 
-const App = () => {  
+const App = (props) => {
+
+  const [loggedIn, setLoggedIn] = useState((sessionStorage.getItem("userID")) ? true : false)
+
+  useEffect(() => {
+    setLoggedIn((sessionStorage.getItem("UserID")) ? true : false)
+  }, [])  
 
   return (
     <React.Fragment>
-      <NavBar  />
+      <NavBar 
+        loggedIn={loggedIn} 
+        setLoggedIn={setLoggedIn}
+      />
       <Switch>
         {routes.map(({ path, exact, component: C, ...rest }) => (
           <Route
@@ -20,6 +29,7 @@ const App = () => {
               <C
                 {...props}
                 {...rest}
+                setLoggedIn={setLoggedIn}
               />
             )}
           />

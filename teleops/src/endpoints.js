@@ -86,3 +86,39 @@ export const GetConfig = async (configID) => {
     })
     return promise
 }
+
+export const SaveConfig = (configID, workStart, firstBreakStart, firstBreakEnd, secondBreakStart, secondBreakEnd, lunchBreakStart, lunchBreakEnd, thirdBreakStart, thirdBreakEnd, workEnd) => {
+    
+    const bodyData = {
+        configID,
+        workStart,
+        firstBreakStart,
+        firstBreakEnd,
+        secondBreakStart,
+        secondBreakEnd,
+        lunchBreakStart,
+        lunchBreakEnd,
+        thirdBreakStart,
+        thirdBreakEnd,
+        workEnd
+    }
+    const promise = new Promise((resolve, reject) => {
+        axios({            
+            url:  `${APIURL}/updateconfig`,
+            method: "POST",
+            data: bodyData,
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => {
+            // console.log(response)
+            resolve(response)
+        })
+        .catch(errorResponse => {
+            console.error(errorResponse)
+            reject(errorResponse)
+        })
+    })
+    return promise
+}

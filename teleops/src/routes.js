@@ -1,6 +1,6 @@
 import Register from "./components/externalpages/Register";
 import UserLogin from "./components/externalpages/UserLogin";
-import Timeline from "./components/mainpage/Timeline";
+import MainPage from "./components/mainpage/MainPage";
 import WorkDayConfig from "./components/settingpages/WorkDayConfig"
 
 const routes = [
@@ -13,9 +13,9 @@ const routes = [
         exact: true,
         component: Register
     },{
-        path: "/timeline",
+        path: "/main",
         exact: true,
-        component: Timeline
+        component: MainPage
     },{
         path: "/config",
         exact: true,

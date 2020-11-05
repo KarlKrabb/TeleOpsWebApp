@@ -25,7 +25,8 @@ const UserLogin = (props) => {
                     sessionStorage.setItem("UserID", UserID)
                     sessionStorage.setItem("ConfigID", ConfigID)
                     sessionStorage.setItem("UserStatus", "Existing")
-                    props.history.push("/timeline");
+                    props.setLoggedIn(true)
+                    props.history.push("/main");
                 }else{
                     setLoginError("Username or password is incorrect")
                 }

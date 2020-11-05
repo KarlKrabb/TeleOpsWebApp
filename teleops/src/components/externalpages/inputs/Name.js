@@ -23,7 +23,7 @@ const Name = (props) => {
 
     return(
         <React.Fragment>
-            {(value.length > 0) && <label style={inputLabel} htmlFor="nameInput">Surname</label>}
+            {(value.length > 0) && <label style={inputLabel} htmlFor="nameInput">Name</label>}
             <div style={inputContainerStyle}>
                 <input
                     name="name"

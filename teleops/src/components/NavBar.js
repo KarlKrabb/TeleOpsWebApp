@@ -2,30 +2,29 @@ import React, { useEffect, useState } from "react"
 import {NavLink} from "react-router-dom"
 
 const NavBar = (props) => {
-    const [UserID, setUserID ] = useState(sessionStorage.getItem("UserID"))
-    
 
     useEffect(() => {
-        if(sessionStorage.getItem("UserID") !== null ){
-            if(UserID !== sessionStorage.getItem("UserID")){
-                setUserID(sessionStorage.getItem("UserID"))
-            }
-        }
-    })
+        checkLoginStatus()
+    }, [])
+
+    const checkLoginStatus = () => {
+        props.setLoggedIn((sessionStorage.getItem("UserID")) ? true : false)
+    }
 
     return(
         <nav style={navStyles}>
             <h3>Tele-Operative</h3>            
             <ul style={ulStyles}>
-                { console.log(UserID), (UserID > 0) ?
+                { props.loggedIn ?
                 //Logged In
                 <React.Fragment>
                     <li>
                         <NavLink
-                            to="/timeline"
+                            to="/main"
                             style={linkStyle}
                             activeStyle={activeLinkStyle}
-                            exact                            
+                            exact
+                            onClick={() => {checkLoginStatus()}}
                         >
                             Timeline
                         </NavLink>
@@ -35,7 +34,8 @@ const NavBar = (props) => {
                             to="/config"
                             style={linkStyle}
                             activeStyle={activeLinkStyle}
-                            exact                            
+                            exact
+                            onClick={() => {checkLoginStatus()}}
                         >
                             Settings
                         </NavLink>
@@ -49,7 +49,8 @@ const NavBar = (props) => {
                             onClick={()=>{
                                 sessionStorage.removeItem("UserID") 
                                 sessionStorage.removeItem("ConfigID") 
-                                sessionStorage.removeItem("UserStatus") 
+                                sessionStorage.removeItem("UserStatus")
+                                checkLoginStatus()
                             }}
                         >
                             Logout
@@ -65,6 +66,7 @@ const NavBar = (props) => {
                             style={linkStyle}
                             activeStyle={activeLinkStyle}
                             exact
+                            onClick={() => {checkLoginStatus()}}
                         >
                             Login
                         </NavLink>
@@ -74,7 +76,8 @@ const NavBar = (props) => {
                             to="/register"
                             style={linkStyle}
                             activeStyle={activeLinkStyle}
-                            exact         
+                            exact
+                            onClick={() => {checkLoginStatus()}}
                         >
                             Register
                         </NavLink>
