@@ -39,7 +39,7 @@ const UserLogin = (props) => {
     return(
         <div style={loginPageStyle}>
             <div style={loginFormContainer}>                
-                <h2>User Login</h2>                        
+                <h2 style={{color:"white"}}>Login</h2>                        
                 <form style={formStyles}>                    
                     <Username 
                         parentObj={username}
@@ -56,7 +56,7 @@ const UserLogin = (props) => {
                         onClick={() => {handleSubmit()}}
                         style={submitBtnStyle}
                     >
-                        Login
+                        Go
                     </div>
                 </form>
                 {(loginError !== "") && <p style={errorStyle}>{loginError}</p>}
@@ -81,6 +81,7 @@ const loginFormContainer = {
     marginRight: "2%",
     maxWidth: "300px",
     border: "1px solid lightgrey",
+    backgroundColor: "#00BBFF",
     padding: "20px",
     borderRadius: "10px"
 }
@@ -91,7 +92,7 @@ const formStyles = {
 
 const submitBtnStyle = {
     marginTop: "20px",
-    backgroundColor: "green",
+    backgroundColor: "#60ff5c",
     color: "white",
     border: "none",
     padding: "10px",    
@@ -109,7 +110,8 @@ const linkStyle = {
     color: "#5d5d5d",
     fontSize: "0.8em",
     marginTop: "10px",
-    display: "block"
+    display: "block",
+    color: "white"
 }
 
 const inputWrap = {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import {NavLink} from "react-router-dom"
+import logo from "../images/TeleOppsLogoNB.svg"
 
 const NavBar = (props) => {
 
@@ -13,7 +14,8 @@ const NavBar = (props) => {
 
     return(
         <nav style={navStyles}>
-            <h3>Tele-Operative</h3>            
+            <img style={logoStyle} src={logo} alt="tele operative logo" />
+            <h3 style={{color:"white"}} >Tele-Operative</h3>            
             <ul style={ulStyles}>
                 { props.loggedIn ?
                 //Logged In
@@ -95,7 +97,7 @@ const navStyles = {
     justifyContent: "space-around",
     alignItems: "center",
     minHeight: "10vh",
-    backgroundColor: "#666"
+    backgroundColor: "#00BBFF"
 }
 
 const ulStyles = {
@@ -115,5 +117,10 @@ const linkStyle = {
 const activeLinkStyle = {
     fontWeight: "bold",
     paddingBottom: "5px",
-    borderBottom: "1px solid #37a2ff"
+    borderBottom: "1px solid Red"
+}
+
+const logoStyle = {
+    width: "130px",
+    
 }

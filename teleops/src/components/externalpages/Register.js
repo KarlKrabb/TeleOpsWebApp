@@ -51,7 +51,7 @@ const Register = (props) => {
     return(        
         <div style={registerPageStyle}>
             <div style={registerFormContainer}>
-                <h2>Register</h2>
+                <h2 style={{color:"white"}}>Register</h2>
                 <form style={formStyles}>                    
                     <Name 
                         parentObj={name}
@@ -108,7 +108,8 @@ const registerFormContainer = {
     maxWidth: "300px",
     border: "1px solid lightgrey",
     padding: "20px",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    backgroundColor: "#00BBFF"
 }
 
 const formStyles = {
@@ -117,7 +118,7 @@ const formStyles = {
 
 const submitBtnStyle = {
     marginTop: "20px",
-    backgroundColor: "green",
+    backgroundColor: "#60ff5c",
     color: "white",
     border: "none",
     padding: "10px",    
